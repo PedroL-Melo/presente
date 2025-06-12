@@ -54,6 +54,7 @@
             height: 60px;
             border-radius: 12px;
             object-fit: cover;
+            aspect-ratio: 1 / 1; 
         }
 
         .info {
@@ -101,32 +102,30 @@
         }
 
         /* Slider */
+/* Slider */
 .slider {
-  /* Adicionado para manter a consistência com outros elementos */
-  max-width: 500px; 
+  max-width: 500px;
+  width: 100%;
+  /* ADICIONE UMA ALTURA FIXA AQUI (ajuste o valor como preferir) */
+  height: 350px; 
+  margin: 30px auto;
   overflow: hidden;
   border-radius: 16px;
-  margin: 30px auto;
-  /* Adicionado para garantir que o conteúdo interno se alinhe corretamente */
-  width: 100%; 
 }
 .slides {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  /* Mantido para acomodar as 3 imagens */
-  width: 300%; 
+  width: 300%;
+  /* ADICIONE ESTA LINHA para que o container das imagens ocupe a altura definida acima */
+  height: 100%;
 }
 .slides img {
-  /* ALTERAÇÃO PRINCIPAL: 
-    Em vez de 100vw, a imagem agora ocupa 1/3 do contêiner '.slides' (que tem 300%).
-    Isso faz com que cada imagem ocupe 100% da largura do contêiner '.slider'.
-  */
-  width: calc(100% / 3); 
-  height: auto;
+  width: calc(100% / 3);
+  /* ADICIONE ESTA LINHA para que cada imagem preencha a altura do container */
+  height: 100%;
   flex-shrink: 0;
-  object-fit: cover;
+  object-fit: cover; /* Object-fit garante que a imagem não fique distorcida */
 }
-
 /* Removido pois se tornou desnecessário com a correção acima */
 @media (max-width: 600px) {
   /* A regra anterior aqui era redundante e foi removida. */
@@ -232,49 +231,56 @@
 
     <!-- Scripts -->
     <script>
-        // Slider automático
-        const slides = document.querySelector(".slides");
-        const slideWidth = 300;
-        let index = 0;
+  // Slider
+  const slides = document.getElementById("slides");
+  // Para deixar o código mais robusto, contamos as imagens automaticamente
+  const numSlides = slides.children.length;
+  let index = 0;
+  setInterval(() => {
+    index = (index + 1) % numSlides;
+    
+    /* ALTERAÇÃO PRINCIPAL:
+      Trocamos a unidade 'vw' por porcentagem (%). 
+      O cálculo (100 / numSlides) garante que o deslocamento seja
+      exatamente o tamanho de uma imagem, não importa quantas existam.
+    */
+    slides.style.transform = `translateX(-${index * (100 / numSlides)}%)`;
 
-        setInterval(() => {
-            index = (index + 1) % 3;
-            slides.style.transform = `translateX(-${index * slideWidth}px)`;
-        }, 3000);
+  }, 3000);
 
-        // Player
-        const playBtn = document.getElementById('playBtn');
-        const audio = document.getElementById('audio');
+  // O restante do seu código JavaScript (Player e Contador) continua igual...
+  // Player
+  const playBtn = document.getElementById("playBtn");
+  const audio = document.getElementById("audio");
+  playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = "⏸";
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶";
+    }
+  });
 
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.textContent = '⏸';
-            } else {
-                audio.pause();
-                playBtn.textContent = '▶';
-            }
-        });
+  // Contador de tempo
+  const tempoJuntos = document.getElementById("tempoJuntos");
+  const dataInicio = new Date("2022-10-31T00:00:00");
 
-        // Contador de dias juntos
-        const tempoJuntos = document.getElementById("tempoJuntos");
-        const dataInicio = new Date("2022-10-31T00:00:00");
+  function atualizarContador() {
+    const agora = new Date();
+    const diff = agora - dataInicio;
 
-        function atualizarContador() {
-            const agora = new Date();
-            const diferenca = agora - dataInicio;
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diff / (1000 * 60)) % 60);
+    const segundos = Math.floor((diff / 1000) % 60);
 
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
-            const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
-            const segundos = Math.floor((diferenca / 1000) % 60);
+    tempoJuntos.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+  }
 
-            tempoJuntos.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
-        }
-
-        setInterval(atualizarContador, 1000);
-        atualizarContador();
-    </script>
+  setInterval(atualizarContador, 1000);
+  atualizarContador();
+</script>
 
 </body>
 </html>
