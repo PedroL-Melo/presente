@@ -100,26 +100,37 @@
             justify-content: center;
         }
 
-        .slider {
-            width: 100%;
-            max-width: 300px;
-            margin: auto;
-            overflow: hidden;
-            border-radius: 10px;
-        }
+        /* Slider */
+.slider {
+  /* Adicionado para manter a consistência com outros elementos */
+  max-width: 500px; 
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 30px auto;
+  /* Adicionado para garantir que o conteúdo interno se alinhe corretamente */
+  width: 100%; 
+}
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* Mantido para acomodar as 3 imagens */
+  width: 300%; 
+}
+.slides img {
+  /* ALTERAÇÃO PRINCIPAL: 
+    Em vez de 100vw, a imagem agora ocupa 1/3 do contêiner '.slides' (que tem 300%).
+    Isso faz com que cada imagem ocupe 100% da largura do contêiner '.slider'.
+  */
+  width: calc(100% / 3); 
+  height: auto;
+  flex-shrink: 0;
+  object-fit: cover;
+}
 
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            width: 300%;
-        }
-
-        .slides img {
-            width: 300px;
-            height: auto;
-            flex-shrink: 0;
-            object-fit: cover;
-        }
+/* Removido pois se tornou desnecessário com a correção acima */
+@media (max-width: 600px) {
+  /* A regra anterior aqui era redundante e foi removida. */
+}
 
         .contador-amor {
             text-align: center;
@@ -138,11 +149,8 @@
             color: #ff2f75;
         }
 
-        /* Responsivo */
-        @media (max-width: 500px) {
-            body {
-                padding: 20px 15px;
-            }
+
+        
 
             .music-card {
                 flex-direction: column;
