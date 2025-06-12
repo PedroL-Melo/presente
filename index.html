@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Presente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(to bottom, #2c005e, #1c0099);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .fotos img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        .fotos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .frases, .cartinha {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6em;
+        }
+        .linha-tempo ul {
+            list-style: none;
+            padding: 0;
+        }
+        .linha-tempo li {
+            margin: 10px 0;
+            background: #1f0042;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        audio {
+            display: block;
+            margin: 20px auto;
+        }
+
+        .slider {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%; /* ou calc(100% * número de imagens) se quiser automático */
+        }   
+
+        .slides img {
+            width: 300px;
+            height: auto;
+            flex-shrink: 0;
+            object-fit: cover; /* ou 'contain' se quiser mostrar tudo */
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+
+        .music-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #ff2f75, #e121a3);
+    color: white;
+    border-radius: 20px;
+    padding: 15px;
+    gap: 15px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+}
+
+.info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.info p {
+    margin: 2px 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.preview {
+    font-size: 0.7em;
+    background: white;
+    color: #ff2f75;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon, .play {
+    background: #e121a3;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contador-amor {
+    text-align: center;
+    margin-top: 50px;
+    
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tempoJuntos {
+    font-size: 1.5em;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ff2f75;
+}
+    </style>
+</head>
+<body>
+    <div class="music-card">
+    <img src="capa.jpg" alt="Capa da música" class="cover">
+    <div class="info">
+        <h3>Eu Sou Feliz Assim</h3>
+        <p>Ferrugem</p>
+        <span class="preview">Prévia</span>
+    </div>
+    <div class="actions">
+        <button class="play" id="playBtn">▶</button>
+    </div>
+    <audio id="audio" src="DVD PRAZER, EU SOU FERRUGEM： ＂EU SOU FELIZ ASSIM＂.mp3"></audio>
+</div>
+
+
+    <div class="section fotos">
+        <div class="slider">
+            <div class="slides">
+                <img src="foto1.JPEG" alt="Foto 1">
+                <img src="foto2.JPG" alt="Foto 2">
+                <img src="foto3.JPEG" alt="Foto 3">
+            </div>
+        </div>
+    </div>
+
+    <div class="section cartinha">
+        <h2>Te amo, Meu Bem</h2>
+        <p>Todos os dias que eu estou com você são incríveis, obrigado por melhorar a minha vida e me ajudar a melhorar como pessoa. Eu te amo e vou te amar até tu enjoar de mim. (vc não me atraplha, mas eu precisava terminar isso aqui ksksk)</p>
+    </div>
+
+    <div class="contador-amor">
+    <h2>Estamos juntos há...</h2>
+    <p id="tempoJuntos">Carregando...</p>
+</div>
+
+<script>
+    const slides = document.querySelector(".slides");
+    const slideWidth = 300; // largura fixa da imagem
+    let index = 0;
+
+    setInterval(() => {
+        index = (index + 1) % 3; // 3 imagens
+        slides.style.transform = `translateX(-${index * slideWidth}px)`;
+    }, 3000);
+    const playBtn = document.getElementById('playBtn');
+    const audio = document.getElementById('audio');
+
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playBtn.textContent = '⏸';
+        } else {
+            audio.pause();
+            playBtn.textContent = '▶';
+        }
+    }); 
+
+    const tempoJuntos = document.getElementById("tempoJuntos");
+    const dataInicio = new Date("2022-10-31T00:00:00");
+
+    function atualizarContador() {
+        const agora = new Date();
+        const diferenca = agora - dataInicio;
+
+        const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+        const segundos = Math.floor((diferenca / 1000) % 60);
+
+        tempoJuntos.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+</script>
+
+
+</body>
+</html>
