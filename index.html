@@ -25,35 +25,32 @@
             margin: 40px 0;
         }
 
+        /* Alterações para Responsividade */
         .slider {
-        width: 100%;
-        max-width: 500px;
-        margin: 20px auto; /* Adicionado um pouco de margem */
-        border-radius: 10px;
-        overflow: hidden; /* Essencial para cortar a imagem corretamente */
+            width: 100%;
+            max-width: 500px; /* Aumentado para melhor visualização em telas maiores */
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
 
-        /* --- A ÚNICA REGRA PARA A ALTURA --- */
-        /* O slider terá 30% da altura da tela. Simples assim. */
-        /* Altere para 25vh (menor) ou 40vh (maior) se quiser ajustar. */
-        height: 30vh; 
-    }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            /* A largura será ajustada via JavaScript */
+        }
 
-    .slides {
-        display: flex;
-        width: 100%; /* Largura total do container */
-        height: 100%; /* Altura total do container */
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .slides img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* ESSENCIAL: A imagem preenche a altura definida, cortando o excesso para não distorcer. */
-        flex-shrink: 0;
-    }
-
-    
-    /* ... (o resto do seu CSS continua igual) ... */
+        .slides img {
+            width: 100%; /* Imagem ocupa 100% da largura do slide */
+            height: auto;
+            flex-shrink: 0;
+            object-fit: cover;
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
         /* Fim das alterações para Responsividade */
 
         .frases, .cartinha {
