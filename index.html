@@ -31,40 +31,63 @@
 
     /* Altere APENAS as regras abaixo */
 
+    Excelente pergunta! É exatamente o ponto-chave do problema.
+
+A resposta é: o objetivo do nosso código é forçar o contrário. Nós não queremos que o slider se ajuste ao tamanho da imagem. Nós queremos que a imagem se ajuste ao tamanho do slider.
+
+Pense no .slider como uma moldura de foto com um formato fixo (que definimos com aspect-ratio). A foto (<img>) dentro dele precisa preencher essa moldura.
+
+height: 100% na imagem diz: "Estique-se para ter a mesma altura da moldura".
+object-fit: cover na imagem diz: "Faça isso sem me distorcer. Se sobrar alguma parte de mim para os lados ou para cima/baixo, pode cortar."
+Por que ainda pode parecer grande?
+Se mesmo com a regra aspect-ratio: 16 / 9 ainda parece grande, existem duas possibilidades principais:
+
+A proporção 16/9, embora mais baixa, ainda ocupa um espaço vertical que você considera grande na tela do celular.
+Houve algum erro na aplicação do CSS ou o navegador está mostrando uma versão antiga (cache).
+A Solução Definitiva: Limitar a Altura Máxima
+Para resolver isso de uma vez por todas, vamos adicionar uma regra final e mais "agressiva": max-height.
+
+Essa regra estabelece um teto de altura que o slider nunca poderá ultrapassar, não importa o tamanho da tela ou a proporção. Usaremos a unidade vh (viewport height), que corresponde a uma porcentagem da altura da tela do dispositivo.
+
+Vamos definir que o slider nunca poderá ocupar mais que 35% da altura da tela.
+
+Código CSS Final (Copie e Cole)
+Por favor, substitua todo o bloco de CSS relacionado ao slider pelo código abaixo. Isso garante que não haja regras antigas interferindo.
+
+CSS
+
+<style>
+    /* ... (mantenha o resto do seu CSS como está) ... */
+
+    /* COLE ESTE BLOCO ATUALIZADO NO LUGAR DO ANTIGO */
+
     .slider {
         width: 100%;
-        max-width: 500px;
+        max-width: 500px; /* Limite em telas grandes */
         margin: auto;
         overflow: hidden;
         border-radius: 10px;
         
-        /* --- ADIÇÃO IMPORTANTE --- */
-        /* Define uma proporção fixa para o slider (ex: 4 de largura para 3 de altura) */
-        /* Você pode mudar para 16 / 9 para um formato mais largo, ou 1 / 1 para quadrado */
-        aspect-ratio: 4 / 3; 
+        /* 1. Define a FORMA (mais baixa e larga) */
+        aspect-ratio: 16 / 9; 
+        
+        /* 2. SOLUÇÃO DEFINITIVA: Limita a ALTURA MÁXIMA */
+        /* O slider nunca será mais alto que 35% da altura da tela. */
+        /* Você pode ajustar este valor (ex: 30vh, 40vh) se precisar. */
+        max-height: 35vh; 
     }
 
     .slides {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        
-        /* --- ADIÇÃO IMPORTANTE --- */
-        /* Garante que o container dos slides tenha a mesma altura do slider */
         height: 100%; 
     }
 
     .slides img {
         width: 100%;
-        
-        /* --- MUDANÇA IMPORTANTE --- */
-        /* A imagem deve ocupar 100% da altura do container */
         height: 100%;
-        
         flex-shrink: 0;
-        
-        /* A propriedade abaixo garante que a imagem cubra o espaço sem distorcer, cortando o excesso */
-        object-fit: cover; 
-        
+        object-fit: cover; /* A imagem cobre a área, cortando o excesso */
         margin: 0;
         padding: 0;
         border: none;
