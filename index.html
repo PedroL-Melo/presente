@@ -2,227 +2,217 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presente</title>
     <style>
-        /*
-         * Variáveis de Cor: Facilitam a mudança do tema de cores no futuro.
-         * Basta alterar o valor aqui e ele será atualizado em toda a página.
-        */
-        :root {
-            --primary-bg: #2c005e;
-            --secondary-bg: #1c0099;
-            --card-bg: #1f0042;
-            --accent-pink: #ff2f75;
-            --accent-purple: #e121a3;
-            --accent-green: #4caf50;
-            --text-color: #ffffff;
-        }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background: linear-gradient(to bottom, var(--primary-bg), var(--secondary-bg));
+            background: linear-gradient(to bottom, #2c005e, #1c0099);
             font-family: 'Segoe UI', sans-serif;
-            color: var(--text-color);
+            color: white;
             padding: 20px;
             scroll-behavior: smooth;
         }
-
         h1, h2 {
             text-align: center;
             margin-bottom: 20px;
         }
-
         .section {
             margin: 40px 0;
         }
-        
-        /* --- Music Card --- */
-        .music-card {
-            display: flex;
-            align-items: center;
-            background: linear-gradient(to right, var(--accent-pink), var(--accent-purple));
-            color: var(--text-color);
-            border-radius: 20px;
-            padding: 15px;
-            gap: 15px;
-            max-width: 500px;
-            margin: 40px auto;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .music-card .cover {
-            width: 60px;
-            height: 60px;
+        .fotos img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
             border-radius: 12px;
-            object-fit: cover;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
-
-        .music-card .info {
-            flex: 1;
-        }
-
-        .music-card .info h3 {
-            margin: 0;
-            font-size: 1.1em;
-        }
-
-        .music-card .info p {
-            margin: 2px 0;
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        .music-card .preview {
-            font-size: 0.7em;
-            background: var(--text-color);
-            color: var(--accent-pink);
-            border-radius: 6px;
-            padding: 2px 6px;
-            font-weight: bold;
-        }
-
-        .music-card .actions .play {
-            background: var(--accent-purple);
-            color: var(--text-color);
-            border: none;
-            border-radius: 50%;
-            width: 34px;
-            height: 34px;
-            font-size: 1em;
-            cursor: pointer;
+        .fotos {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
         }
-        
-        /* --- Carrossel de Fotos (Slider) --- */
-        /*
-         * CORREÇÃO: O slider agora é responsivo.
-         * Ele ocupa 80% da largura da tela, com um máximo de 400px.
-        */
+        .frases, .cartinha {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6em;
+        }
+        .linha-tempo ul {
+            list-style: none;
+            padding: 0;
+        }
+        .linha-tempo li {
+            margin: 10px 0;
+            background: #1f0042;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        audio {
+            display: block;
+            margin: 20px auto;
+        }
+
         .slider {
-            width: 80%;
-            max-width: 400px; /* Aumentado para melhor visualização */
+            width: 100%;
+            max-width: 300px;
             margin: auto;
             overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
 
         .slides {
             display: flex;
             transition: transform 0.5s ease-in-out;
-            /* A largura agora é definida dinamicamente pelo JavaScript */
-        }
+            width: 300%; /* ou calc(100% * número de imagens) se quiser automático */
+        }   
 
         .slides img {
-            /* A imagem ocupa 100% da largura do container '.slider' */
-            width: 100%;
+            width: 300px;
             height: auto;
             flex-shrink: 0;
-            object-fit: cover;
-        }
-        
-        /* --- Cartinha e Contador --- */
-        .cartinha {
-            max-width: 600px;
-            margin: 40px auto;
-            text-align: center;
-            font-size: 1.2em;
-            line-height: 1.6em;
-        }
-        
-        .contador-amor {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            border-radius: 16px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            object-fit: cover; /* ou 'contain' se quiser mostrar tudo */
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
         }
 
-        #tempoJuntos {
-            font-size: 1.5em;
-            margin-top: 10px;
-            font-weight: bold;
-            color: var(--accent-pink);
-        }
 
+        .music-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #ff2f75, #e121a3);
+    color: white;
+    border-radius: 20px;
+    padding: 15px;
+    gap: 15px;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+}
+
+.info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.info p {
+    margin: 2px 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.preview {
+    font-size: 0.7em;
+    background: white;
+    color: #ff2f75;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon, .play {
+    background: #e121a3;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contador-amor {
+    text-align: center;
+    margin-top: 50px;
+    
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tempoJuntos {
+    font-size: 1.5em;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ff2f75;
+}
     </style>
 </head>
 <body>
-
     <div class="music-card">
-        <img src="https://placehold.co/100x100/e121a3/white?text=Capa" alt="Capa da música" class="cover">
-        <div class="info">
-            <h3>Eu Sou Feliz Assim</h3>
-            <p>Ferrugem</p>
-            <span class="preview">Prévia</span>
-        </div>
-        <div class="actions">
-            <button class="play" id="playBtn">▶</button>
-        </div>
-        <audio id="audio" src="DVD PRAZER, EU SOU FERRUGEM： ＂EU SOU FELIZ ASSIM＂.mp3"></audio>
+    <img src="capa.jpg" alt="Capa da música" class="cover">
+    <div class="info">
+        <h3>Eu Sou Feliz Assim</h3>
+        <p>Ferrugem</p>
+        <span class="preview">Prévia</span>
     </div>
+    <div class="actions">
+        <button class="play" id="playBtn">▶</button>
+    </div>
+    <audio id="audio" src="DVD PRAZER, EU SOU FERRUGEM： ＂EU SOU FELIZ ASSIM＂.mp3"></audio>
+</div>
+
 
     <div class="section fotos">
         <div class="slider">
             <div class="slides">
-                <img src="https://placehold.co/400x400/2c005e/white?text=Foto+1" alt="Foto 1">
-                <img src="https://placehold.co/400x400/1c0099/white?text=Foto+2" alt="Foto 2">
-                <img src="https://placehold.co/400x400/ff2f75/white?text=Foto+3" alt="Foto 3">
+                <img src="foto1.JPEG" alt="Foto 1">
+                <img src="foto2.JPG" alt="Foto 2">
+                <img src="foto3.JPEG" alt="Foto 3">
             </div>
         </div>
     </div>
 
     <div class="section cartinha">
         <h2>Te amo, Meu Bem</h2>
-        <p>Todos os dias que eu estou com você são incríveis, obrigado por melhorar a minha vida e me ajudar a melhorar como pessoa. Eu te amo e vou te amar até tu enjoar de mim. (vc não me atrapalha, mas eu precisava terminar isso aqui ksksk)</p>
+        <p>Todos os dias que eu estou com você são incríveis, obrigado por melhorar a minha vida e me ajudar a melhorar como pessoa. Eu te amo e vou te amar até tu enjoar de mim. (vc não me atraplha, mas eu precisava terminar isso aqui ksksk)</p>
     </div>
 
     <div class="contador-amor">
-        <h2>Estamos juntos há...</h2>
-        <p id="tempoJuntos">Carregando...</p>
-    </div>
+    <h2>Estamos juntos há...</h2>
+    <p id="tempoJuntos">Carregando...</p>
+</div>
 
 <script>
-// Garante que o script só rode depois que a página carregar completamente.
-document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelector(".slides");
+    const slideWidth = 300; // largura fixa da imagem
+    let index = 0;
 
-    /* --- LÓGICA DO CARROSSEL DE FOTOS --- */
-    // CORREÇÃO: O código agora é dinâmico e responsivo.
-    const slider = document.querySelector(".slider");
-    const slidesContainer = document.querySelector(".slides");
-    const slides = document.querySelectorAll(".slides img");
-
-    if (slides.length > 0) {
-        let currentIndex = 0;
-        const numSlides = slides.length;
-        
-        // Define a largura do container de slides para comportar todas as imagens lado a lado.
-        slidesContainer.style.width = `${numSlides * 100}%`;
-
-        const startSlider = () => {
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % numSlides;
-                const offset = -currentIndex * slider.clientWidth;
-                slidesContainer.style.transform = `translateX(${offset}px)`;
-            }, 3000); // Muda de imagem a cada 3 segundos
-        };
-        
-        startSlider();
-    }
-
-
-    /* --- LÓGICA DO PLAYER DE MÚSICA --- */
-    // Seu código original já estava ótimo, nenhuma correção necessária aqui.
+    setInterval(() => {
+        index = (index + 1) % 3; // 3 imagens
+        slides.style.transform = `translateX(-${index * slideWidth}px)`;
+    }, 3000);
     const playBtn = document.getElementById('playBtn');
     const audio = document.getElementById('audio');
 
@@ -234,11 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.pause();
             playBtn.textContent = '▶';
         }
-    });
+    }); 
 
-    /* --- LÓGICA DO CONTADOR DE TEMPO --- */
-    // Seu código original já estava perfeito, nenhuma correção necessária.
-    const tempoJuntosEl = document.getElementById("tempoJuntos");
+    const tempoJuntos = document.getElementById("tempoJuntos");
     const dataInicio = new Date("2022-10-31T00:00:00");
 
     function atualizarContador() {
@@ -250,15 +238,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
         const segundos = Math.floor((diferenca / 1000) % 60);
 
-        tempoJuntosEl.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+        tempoJuntos.textContent = `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
     }
 
-    // Atualiza o contador a cada segundo e chama uma vez no início para não haver atraso.
     setInterval(atualizarContador, 1000);
     atualizarContador();
-
-});
 </script>
+
 
 </body>
 </html>
