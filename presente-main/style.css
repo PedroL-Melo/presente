@@ -1,0 +1,167 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #2c005e, #1c0099);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .section { margin: 40px 0; }
+        
+        .fotos img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        
+        .fotos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .frases, .cartinha {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6em;
+        }
+        
+        .linha-tempo ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .linha-tempo li {
+            margin: 10px 0;
+            background: #1f0042;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        audio {
+            display: block;
+            margin: 20px auto;
+        }
+
+        .slider {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%; 
+        }   
+
+        .slides img {
+            width: 300px;
+            height: auto;
+            flex-shrink: 0;
+            object-fit: cover; 
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        .music-card {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #ff2f75, #e121a3);
+            color: white;
+            border-radius: 20px;
+            padding: 15px;
+            gap: 15px;
+            max-width: 500px;
+            margin: 40px auto;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        .info {
+            flex: 1;
+        }
+        
+        .info h3 {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .info p {
+            margin: 2px 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .preview {
+            font-size: 0.7em;
+            background: white;
+            color: #ff2f75;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .icon, .play {
+            background: #e121a3;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contador-amor {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #tempoJuntos {
+            font-size: 1.5em;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #ff2f75;
+        }
